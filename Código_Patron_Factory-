@@ -1,0 +1,55 @@
+class Pizza:
+    def __init__(self):
+        self.name = None
+        self.ingredients = []
+
+    def prepare(self):
+        print(f"Preparing {self.name} pizza")
+        print("Adding ingredients:", ", ".join(self.ingredients))
+
+    def bake(self):
+        print("Baking the pizza")
+
+    def cut(self):
+        print("Cutting the pizza into slices")
+
+    def box(self):
+        print("Putting the pizza in a box")
+
+# Concrete Products
+class MargheritaPizza(Pizza):
+    def __init__(self):
+        super().__init__()
+        self.name = "Margherita"
+        self.ingredients = ["Tomato Sauce", "Mozzarella Cheese", "Basil"]
+
+class PepperoniPizza(Pizza):
+    def __init__(self):
+        super().__init__()
+        self.name = "Pepperoni"
+        self.ingredients = ["Tomato Sauce", "Mozzarella Cheese", "Pepperoni"]
+
+# Factory
+class PizzaFactory:
+    def create_pizza(self, pizza_type):
+        if pizza_type == "Margherita":
+            return MargheritaPizza()
+        elif pizza_type == "Pepperoni":
+            return PepperoniPizza()
+        else:
+            raise ValueError("Invalid pizza type")
+
+# Usage
+factory = PizzaFactory()
+
+pizza1 = factory.create_pizza("Margherita")
+pizza1.prepare()
+pizza1.bake()
+pizza1.cut()
+pizza1.box()
+
+pizza2 = factory.create_pizza("Pepperoni")
+pizza2.prepare()
+pizza2.bake()
+pizza2.cut()
+pizza2.box()
