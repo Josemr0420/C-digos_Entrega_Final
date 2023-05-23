@@ -1,0 +1,23 @@
+class User:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+
+class Post:
+    def __init__(self, title, content, author):
+        self.title = title
+        self.content = content
+        self.author = author
+
+# View
+class View:
+    def show_post(self, post):
+        print("Title:", post.title)
+        print("Content:", post.content)
+        print("Author:", post.author.name)
+        print()
+
+# Template
+class Template:
+    def render(self, post):
+        return f"<h1>{post.title}</h1><p>{post.content}</p><p>{post.author.name}</p>"
