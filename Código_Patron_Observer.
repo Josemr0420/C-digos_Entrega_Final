@@ -1,0 +1,48 @@
+class Subject:
+    def __init__(self):
+        self.observers = []
+
+    def register_observer(self, observer):
+        self.observers.append(observer)
+
+    def unregister_observer(self, observer):
+        self.observers.remove(observer)
+
+    def notify_observers(self, data):
+        for observer in self.observers:
+            observer.update(data)
+
+# Observer
+class Observer:
+    def update(self, data):
+        pass
+
+# Concrete Subject
+class NewsPublisher(Subject):
+    def publish_news(self, news):
+        self.notify_observers(news)
+
+# Concrete Observer
+class EmailSubscriber(Observer):
+    def update(self, data):
+        print("Received news via email:", data)
+
+# Concrete Observer
+class SMSSubscriber(Observer):
+    def update(self, data):
+        print("Received news via SMS:", data)
+
+# Usage
+publisher = NewsPublisher()
+
+email_subscriber = EmailSubscriber()
+sms_subscriber = SMSSubscriber()
+
+publisher.register_observer(email_subscriber)
+publisher.register_observer(sms_subscriber)
+
+publisher.publish_news("Breaking news: The event has been postponed.")
+
+publisher.unregister_observer(sms_subscriber)
+
+publisher.publish_news("Breaking news: The venue has changed.")
